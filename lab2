@@ -34,15 +34,17 @@ if __name__ == '__main__':
     grovepi.pinMode(potentiometer, "INPUT")
     time.sleep(1)
     while True:
-        threshhold = grovepi.analogRead(potentiometer) #Port A0
-        print(str(threshhold) + "cm")
-        # setText(str(threshhold) + "cm")
+        threshhold = (grovepi.analogRead(potentiometer))/1.98 #Port A0
+        #threshhold = 20
+        #print(str(threshhold) + "cm")
+        setText(str(threshhold) + "cm")
         if grovepi.ultrasonicRead(PORT) < threshhold:
-            print(str(threshhold) + "cm OBJ PRESS")
-            # setText(str(threshhold) + "cm OBJ PRES")
+            #print(str(threshhold) + "cm OBJ PRES")
+            setText(str(threshhold) + "cm OBJ PRES    "+ str(grovepi.ultrasonicRead(PORT)))
         else:
-            print(str(threshhold) + "cm")
-            #setText(str(threshhold) + "cm")
+            #print(str(threshhold) + "cm")
+            setText(str(threshhold) + "cm")
+
         #So we do not poll the sensors too quickly which may introduce noise,
         #sleep for a reasonable time of 200ms between each iteration.
         time.sleep(0.2)
