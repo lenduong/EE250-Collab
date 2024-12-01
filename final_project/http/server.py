@@ -36,7 +36,6 @@ def post_image_callback():
         with open(save_path, "wb") as f:
                 f.write(image_data)
     
-        return jsonify({"message": f"Image {image_file.filename} received and saved at {save_path}"}), 200
-
+        return jsonify({"message": f"Image received and saved as {save_path}"}), 200
 if __name__ == '__main__':
         app.run(debug=True, host='0.0.0.0', port=5000)
