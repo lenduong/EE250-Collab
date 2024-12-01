@@ -24,8 +24,16 @@ def post_image_callback():
         image_file = request.files['image']
         
         # Save the image locally (optional)
+        raw_path = f'uploads/{image_file.filename}'
         save_path = f'uploads/{image_file.filename}.jpg'
-        image_file.save(save_path, "JPEG")
+        image_file.save(raw_path)
+
+        with Image.open(raw_path) as img:
+                # Convert to RGB mode (JPEG doesn't support transparency)
+                img = img.convert("RGB")
+                
+                # Save the image as JPEG
+                img.save(save_path, "JPEG")
     
         return jsonify({"message": f"Image {image_file.filename} received and saved at {save_path}"}), 200
 
