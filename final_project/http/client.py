@@ -20,13 +20,19 @@ if __name__ == '__main__':
         # cv2.imwrite('./testing/testimage2.jpg', image)
         cam.release()
         # ----------------------------------
-        # Open the image file in binary mode
-        # with open("your_image.jpg", "rb") as image_file:
-        # files = {"image": image_file}
-        files = {"image": image}
+        # # Open the image file in binary mode
+        # # with open("your_image.jpg", "rb") as image_file:
+        # # files = {"image": image_file}
+        # files = {"image": image}
         
-        # Send the POST request
-        response = requests.post(url, files=files)
+        # # Send the POST request
+        # response = requests.post(url, files=files)
+
+        _, buffer = cv2.imencode('.jpg', image)
+
+        # Send the image via HTTP POST
+        headers = {"Content-Type": "image/jpeg"}  # Indicate JPEG format
+        response = requests.post(url, data=buffer.tobytes(), headers=headers)
         
         # Check the response status code
         if response.status_code == 200:
