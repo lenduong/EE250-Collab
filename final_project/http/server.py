@@ -17,7 +17,7 @@ app = Flask('RaspberryPi Mailbox Server')
 def post_image_callback():
         # Check if an image is in the request
         if 'image' not in request.files:
-        return jsonify({"error": "No image file in request"}), 400
+                return jsonify({"error": "No image file in request"}), 400
         
         # Retrieve the image
         image_file = request.files['image']
