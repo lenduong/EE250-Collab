@@ -13,7 +13,7 @@ from threading import Lock
 
 app = Flask('RaspberryPi Mailbox Server')
 
-@app.route('/send-image', methods=['POST'])
+@app.route('/send_image', methods=['POST'])
 def post_image_callback():
         # Check if an image is in the request
         if 'image' not in request.files:
