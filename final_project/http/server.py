@@ -32,7 +32,7 @@ def post_image_callback():
 
         # Save the image data
         image_data = request.data
-        save_path = f'uploads/{image_file.filename}.jpg'
+        save_path = f'uploads/test_image.jpg'
         with open(save_path, "wb") as f:
                 f.write(image_data)
     
