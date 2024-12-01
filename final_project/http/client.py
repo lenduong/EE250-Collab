@@ -23,7 +23,7 @@ if __name__ == '__main__':
         # Open the image file in binary mode
         # with open("your_image.jpg", "rb") as image_file:
         # files = {"image": image_file}
-        files = {"image.jpg": image}
+        files = {"image": image}
         
         # Send the POST request
         response = requests.post(url, files=files)
