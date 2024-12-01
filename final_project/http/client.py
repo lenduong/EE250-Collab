@@ -2,7 +2,7 @@ import requests
 import cv2
 
 if __name__ == '__main__':
-        url = "https://192.168.91.71:5000/send_image"
+        url = "http://192.168.91.71:5000/send_image"
         
         # Start recording
         cam = cv2.VideoCapture(0)
