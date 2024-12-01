@@ -29,4 +29,4 @@ def post_image_callback():
         return jsonify({"message": f"Image {image_file.filename} received and saved at {save_path}"}), 200
 
 if __name__ == '__main__':
-        app.run(debug=False, host='0.0.0.0', port=5000)
+        app.run(debug=True, host='0.0.0.0', port=5000)
