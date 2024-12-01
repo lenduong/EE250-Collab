@@ -24,7 +24,7 @@ def post_image_callback():
         
         # Save the image locally (optional)
         save_path = f'uploads/{image_file.filename}.jpg'
-        image_file.save(save_path)
+        image_file.save(save_path, "JPEG")
     
         return jsonify({"message": f"Image {image_file.filename} received and saved at {save_path}"}), 200
 
