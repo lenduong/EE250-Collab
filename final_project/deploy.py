@@ -24,7 +24,7 @@ if __name__ == '__main__':
 
   # Find the hand number image the model should read/predict
   # image_path = 'g_1.png'
-  image_path = 'uploads/test_image.jpg'
+  image_path = 'capturing_single_image/g_0.png'
   if len(sys.argv) > 0:
     image_path = sys.argv[0]
   
