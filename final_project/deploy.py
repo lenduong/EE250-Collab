@@ -23,7 +23,8 @@ if __name__ == '__main__':
   loaded_model = keras.models.load_model('handNums_model.h5')
 
   # Find the hand number image the model should read/predict
-  image_path = 'g_1.png'
+  # image_path = 'g_1.png'
+  image_path = 'uploads/test_image.jpg'
   if len(sys.argv) > 0:
     image_path = sys.argv[0]
   
