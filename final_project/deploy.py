@@ -24,7 +24,7 @@ if __name__ == '__main__':
 
   # Find the hand number image the model should read/predict
   # image_path = 'g_1.png'
-  image_path = '/mnt/c/Users/leduo/Desktop/EE250-Collab/final_project/deploy.py/capturing_single_image/g_0.png'
+  image_path = '/mnt/c/Users/leduo/Desktop/EE250-Collab/final_project/capturing_single_image/g_0.png'
   # if len(sys.argv) > 0:
   #   image_path = sys.argv[0]
   
