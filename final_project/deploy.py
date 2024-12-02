@@ -3,6 +3,7 @@ import numpy as np
 import tensorflow as tf
 import tensorflow.keras as keras
 from PIL import Image
+import matplotlib.pyplot as plt
 
 print("Arguments: ")
 print(sys.argv)
