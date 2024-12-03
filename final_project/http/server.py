@@ -31,7 +31,7 @@ from threading import Lock
 # ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ###
 
 # import pickle
-LED_command # global variable
+LED_command = False # global variable
 
 app = Flask('RaspberryPi Mailbox Server')
 loaded_model = keras.models.load_model('handNums_model-1104.h5')
@@ -39,8 +39,7 @@ loaded_model = keras.models.load_model('handNums_model-1104.h5')
 @app.route('/')
 def home():
     global LED_command
-    if LED_command is None:
-        return "No value detected yet."
+    
     return LED_command
 
 @app.route('/send_image', methods=['POST'])
