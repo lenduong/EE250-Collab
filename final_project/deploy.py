@@ -34,8 +34,13 @@ if __name__ == '__main__':
 
   img_array = image_preprocessor('1003_4.png')
   prediction = loaded_model(img_array) # use a direct call for small input size
-
+  predict_value = np.argmax(prediction)
+  
   print("Model Prediction: ")
-  print(np.argmax(prediction))
+  print(predict_value)
   
-  
+  # Taking model output and converting it to be ON or OFF for LEDs
+  if predict_value % 2 == 0:
+    print("LED ON")
+  else:
+    print("LED OFF")
