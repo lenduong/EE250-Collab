@@ -50,6 +50,20 @@ def post_image_callback():
             f.write(image_data)
 
     return jsonify({"message": f"Image received and saved as {save_path}"}), 200
+
+
+# Define image pre-processing in a function
+def image_preprocessor(image_path):
+  img = Image.open(image_path).convert('L')
+  img = img.resize(size=(128, 128))
+  img_array = (np.array(img) > 100)*255  # Convert to a numpy array
+  plt.imshow(img_array)
+
+  img_array = img_array / 255.0  # Normalize pixel values to [0, 1]
+  img_array = img_array.reshape(1, 128, 128, 1)  # Reshape for model input
+                # (batch_size, image dimension, single channel grayscale)
+
+
 if __name__ == '__main__':
     # app.run(debug=True, host='0.0.0.0', port=5000) #For VM
     # app.run(debug=True, host='127.0.0.1', port=5000)
