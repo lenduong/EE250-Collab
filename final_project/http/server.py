@@ -35,8 +35,6 @@ from threading import Lock
 app = Flask('RaspberryPi Mailbox Server')
 loaded_model = keras.models.load_model('handNums_model-1104.h5')
 
-# Initialize count
-count = 0
 
 @app.route('/send_image', methods=['POST'])
 def post_image_callback():
@@ -77,6 +75,9 @@ def image_preprocessor(image_path):
                 # (batch_size, image dimension, single channel grayscale)
   return img_array
 
+# Initialize count
+count = 0
+
 def deploy():
     image_path = '/mnt/c/Users/leduo/Desktop/EE250-Collab/final_project/http/uploads/test_image.jpg'
     img_array = image_preprocessor(image_path)
@@ -106,3 +107,6 @@ if __name__ == '__main__':
 
     # Load the trained model from the header file
     loaded_model = keras.models.load_model('handNums_model-1104.h5')
+
+    # Initialize count
+    count = 0
