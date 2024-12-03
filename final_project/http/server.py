@@ -51,9 +51,9 @@ def post_image_callback():
 
     return jsonify({"message": f"Image received and saved as {save_path}"}), 200
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000) #For VM
+    # app.run(debug=True, host='0.0.0.0', port=5000) #For VM
     # app.run(debug=True, host='127.0.0.1', port=5000)
-    # app.run(debug=True, host='172.26.242.207', port=4000)
+    app.run(debug=True, host='172.26.242.207', port=8080)
 
     # ## Potentiometer code from lab2.py ## 
     # potentiometer = 0
