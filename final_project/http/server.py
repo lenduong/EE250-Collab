@@ -3,6 +3,13 @@ from flask import jsonify
 from flask import request
 from PIL import Image
 
+# Imports for loading the ML model #
+import numpy as np
+import tensorflow as tf
+import tensorflow.keras as keras
+from PIL import Image
+import matplotlib.pyplot as plt
+
 import argparse
 import json
 #import mailboxManager
@@ -62,30 +69,25 @@ def image_preprocessor(image_path):
   img_array = img_array / 255.0  # Normalize pixel values to [0, 1]
   img_array = img_array.reshape(1, 128, 128, 1)  # Reshape for model input
                 # (batch_size, image dimension, single channel grayscale)
+  return img_array
 
 
 if __name__ == '__main__':
-    # app.run(debug=True, host='0.0.0.0', port=5000) #For VM
-    # app.run(debug=True, host='127.0.0.1', port=5000)
-    # app.run(debug=True, host='172.26.242.207', port=8080)
     app.run(debug=True, host='0.0.0.0', port=8080)
 
-    # ## Potentiometer code from lab2.py ## 
-    # potentiometer = 0
-    # # PORT = 4    # D4 -- this was for the ultrasonic in Lab 2
-    # grovepi.pinMode(potentiometer, "INPUT")
-    # time.sleep(1)
-    # # prev_distance = 0
+    # Load the trained model from the header file
+    loaded_model = keras.models.load_model('handNums_model-1104.h5')
 
-    # while True:
-    #     potentRead = int((grovepi.analogRead(potentiometer)) # read the potentiometer value
+    image_path = '/mnt/c/Users/leduo/Desktop/EE250-Collab/final_project/http/uploads/test_image.jpg'
+    img_array = image_preprocessor(image_path)
+    prediction = loaded_model(img_array) # use a direct call for small input size
+    predict_value = np.argmax(prediction)
 
-    #     # range of GrovePi potentiometer= 0 - 1023
-    #     if (  int(grovepi.analogRead(potentiometer)) < 512):
-    #         # Turn on RED LED
-    #         print("Red LED on")
-    #     else:
-    #         print("Blue LED on")       
-                         
-    #     time.sleep(0.2)    
-    # ## END of Potentiometer code from lab2.py ## 
+    print("Model Prediction: ")
+    print(predict_value)
+
+    # Taking model output and converting it to be ON or OFF for LEDs
+    if predict_value % 2 == 0:
+        print("LED ON")
+    else:
+        print("LED OFF")
