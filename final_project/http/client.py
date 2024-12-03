@@ -36,11 +36,11 @@ if __name__ == '__main__':
         # Send the image via HTTP POST
         headers = {"Content-Type": "image/jpeg"}  # Indicate JPEG format
         response = requests.post(url, data=buffer.tobytes(), headers=headers)
-        
+        message = response.json() # Parse the JSON file
         # Check the response status code
         if response.status_code == 200:
             print("Image uploaded successfully")
-            print(response.message1)
+            print(message["message1"])
         else:
             print("Error uploading image:", response.status_code)
 
