@@ -84,7 +84,7 @@ def led_pot():
             
 
 if __name__ == '__main__':
-        
+
         # # -------------------------Record and send image from RPi to Server ----------------------
         # # Create url to send to server (using server's IP addr)
         # url = "http://192.168.91.71:8080/send_image"
@@ -112,6 +112,8 @@ if __name__ == '__main__':
         thread.start()
 
         while True:
+            # Start recording
+            cam = cv2.VideoCapture(0)
             # Caputure the imgage
             ret, image = cam.read()
             cam.release()
