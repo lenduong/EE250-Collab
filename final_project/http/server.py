@@ -95,10 +95,12 @@ def deploy():
     print("count: ", trial_count)
     if trial_count %2 == 0:
         return True
-        global trial_count += 1
+        global trial_count
+        trial_count += 1
     else:
         return False
-        global trial_count += 1
+        global trial_count
+        trial_count += 1
 
     print("count: ", trial_count)
 
