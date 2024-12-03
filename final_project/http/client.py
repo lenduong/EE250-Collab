@@ -91,7 +91,7 @@ if __name__ == '__main__':
             headers = {"Content-Type": "image/jpeg"}  # Indicate JPEG format
             response = requests.post(url, data=buffer.tobytes(), headers=headers)
 
-            sleep(10)
+            time.sleep(10)
         
 
         
