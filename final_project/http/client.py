@@ -91,7 +91,7 @@ if __name__ == '__main__':
             global response
             response = requests.post(url, data=buffer.tobytes(), headers=headers)
 
-            sleep(5)
+            sleep(10)
         
 
         
