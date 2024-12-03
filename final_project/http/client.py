@@ -6,7 +6,25 @@ import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
 import threading
 
-response
+# -------------------------Record and send image from RPi to Server ----------------------
+# Create url to send to server (using server's IP addr)
+url = "http://192.168.91.71:8080/send_image"
+
+# Start recording
+cam = cv2.VideoCapture(0)
+
+# Caputure the imgage
+ret, image = cam.read()
+cam.release()
+
+# Turn the image into jpg file
+_, buffer = cv2.imencode('.jpg', image)
+
+# Send the image via HTTP POST
+headers = {"Content-Type": "image/jpeg"}  # Indicate JPEG format
+response = requests.post(url, data=buffer.tobytes(), headers=headers)
+
+time.sleep(10)
 
 def led_pot():
     # ------------------------Set up for LED and Potentiometer---------------------------
@@ -67,25 +85,25 @@ def led_pot():
 
 if __name__ == '__main__':
         
-        # -------------------------Record and send image from RPi to Server ----------------------
-        # Create url to send to server (using server's IP addr)
-        url = "http://192.168.91.71:8080/send_image"
+        # # -------------------------Record and send image from RPi to Server ----------------------
+        # # Create url to send to server (using server's IP addr)
+        # url = "http://192.168.91.71:8080/send_image"
         
-        # Start recording
-        cam = cv2.VideoCapture(0)
+        # # Start recording
+        # cam = cv2.VideoCapture(0)
 
-        # Caputure the imgage
-        ret, image = cam.read()
-        cam.release()
+        # # Caputure the imgage
+        # ret, image = cam.read()
+        # cam.release()
     
-        # Turn the image into jpg file
-        _, buffer = cv2.imencode('.jpg', image)
+        # # Turn the image into jpg file
+        # _, buffer = cv2.imencode('.jpg', image)
     
-        # Send the image via HTTP POST
-        headers = {"Content-Type": "image/jpeg"}  # Indicate JPEG format
-        response = requests.post(url, data=buffer.tobytes(), headers=headers)
+        # # Send the image via HTTP POST
+        # headers = {"Content-Type": "image/jpeg"}  # Indicate JPEG format
+        # response = requests.post(url, data=buffer.tobytes(), headers=headers)
 
-        time.sleep(10)
+        # time.sleep(10)
 
         # spawn a thread to read keyboard input, specifying the function to run
         thread = threading.Thread(target=led_pot)
