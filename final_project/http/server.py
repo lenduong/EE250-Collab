@@ -53,22 +53,22 @@ def post_image_callback():
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
 
-    ## Potentiometer code from lab2.py ## 
-    potentiometer = 0
-    # PORT = 4    # D4 -- this was for the ultrasonic in Lab 2
-    grovepi.pinMode(potentiometer, "INPUT")
-    time.sleep(1)
-    # prev_distance = 0
+    # ## Potentiometer code from lab2.py ## 
+    # potentiometer = 0
+    # # PORT = 4    # D4 -- this was for the ultrasonic in Lab 2
+    # grovepi.pinMode(potentiometer, "INPUT")
+    # time.sleep(1)
+    # # prev_distance = 0
 
-    while True:
-        potentRead = int((grovepi.analogRead(potentiometer)) # read the potentiometer value
+    # while True:
+    #     potentRead = int((grovepi.analogRead(potentiometer)) # read the potentiometer value
 
-        # range of GrovePi potentiometer= 0 - 1023
-        if (  int(grovepi.analogRead(potentiometer)) < 512):
-            # Turn on RED LED
-            print("Red LED on")
-        else:
-            print("Blue LED on")       
+    #     # range of GrovePi potentiometer= 0 - 1023
+    #     if (  int(grovepi.analogRead(potentiometer)) < 512):
+    #         # Turn on RED LED
+    #         print("Red LED on")
+    #     else:
+    #         print("Blue LED on")       
                          
-        time.sleep(0.2)    
-    ## END of Potentiometer code from lab2.py ## 
+    #     time.sleep(0.2)    
+    # ## END of Potentiometer code from lab2.py ## 
