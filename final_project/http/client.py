@@ -81,6 +81,8 @@ def led_pot():
                     GPIO.output(led, GPIO.LOW)
             else:
                 print("Error uploading image:", response.status_code)
+
+            time.sleep(1)
             
 
 if __name__ == '__main__':
