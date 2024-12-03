@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import jsonify
 from flask import request
+from flask import render_template
 from PIL import Image
 
 # Imports for loading the ML model #
@@ -38,11 +39,11 @@ loaded_model = keras.models.load_model('handNums_model-1104.h5')
 
 @app.route('/')
 def home():
-    global LED_command
-    message = str(LED_command)
-    
-    
-    return message
+    # global LED_command
+    # message = str(LED_command)
+
+    # return message
+    return render_template('frontEnd.html')
 
 @app.route('/send_image', methods=['POST'])
 def post_image_callback():
