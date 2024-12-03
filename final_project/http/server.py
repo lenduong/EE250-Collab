@@ -32,11 +32,9 @@ from threading import Lock
 
 # import pickle
 
-# Initialize count
-trial_count = 0
 app = Flask('RaspberryPi Mailbox Server')
 loaded_model = keras.models.load_model('handNums_model-1104.h5')
-
+trial_count = 0
 
 @app.route('/send_image', methods=['POST'])
 def post_image_callback():
@@ -93,7 +91,7 @@ def deploy():
     # else:
     #     print("LED OFF")
     #     return False
-    trial_count += 1
+    global trial_count
     if trial_count %2 == 0:
         return True
         trial_count += 1
