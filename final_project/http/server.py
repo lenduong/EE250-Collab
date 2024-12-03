@@ -58,8 +58,8 @@ def post_image_callback():
     with open(save_path, "wb") as f:
             f.write(image_data)
         
-    deploy()
-    return jsonify({"message": f"Image received and saved as {save_path}"}), 200
+    LED_command = deploy()
+    return jsonify({"message1": f"Image received and saved as {save_path}", "message2":LED_command}), 200
 
 
 # Define image pre-processing in a function
@@ -86,8 +86,10 @@ def deploy():
     # Taking model output and converting it to be ON or OFF for LEDs
     if predict_value % 2 == 0:
         print("LED ON")
+        return True
     else:
         print("LED OFF")
+        return False
 
 
 if __name__ == '__main__':
