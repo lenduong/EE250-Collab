@@ -92,6 +92,7 @@ def deploy():
     # else:
     #     print("LED OFF")
     #     return False
+    global trial_count 
     print("count: ", trial_count)
     if trial_count %2 == 0:
         return True
