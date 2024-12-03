@@ -34,7 +34,8 @@ from threading import Lock
 
 app = Flask('RaspberryPi Mailbox Server')
 loaded_model = keras.models.load_model('handNums_model-1104.h5')
-global trial_count = 0
+global trial_count 
+trial_count = 0
 
 @app.route('/send_image', methods=['POST'])
 def post_image_callback():
