@@ -39,11 +39,12 @@ loaded_model = keras.models.load_model('handNums_model-1104.h5')
 
 @app.route('/')
 def home():
-    # global LED_command
+    global LED_command
     # message = str(LED_command)
-
     # return message
-    return render_template('frontEnd.html')
+    if LED_command is True:
+        return render_template('frontEnd-ON.html')
+    return render_template('frontEnd-OFF.html')
 
 @app.route('/send_image', methods=['POST'])
 def post_image_callback():
