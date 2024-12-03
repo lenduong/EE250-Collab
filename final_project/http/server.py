@@ -34,6 +34,7 @@ from threading import Lock
 
 app = Flask('RaspberryPi Mailbox Server')
 
+
 @app.route('/send_image', methods=['POST'])
 def post_image_callback():
     # # Check if an image is in the request
@@ -55,7 +56,8 @@ def post_image_callback():
     save_path = f'uploads/test_image.jpg'
     with open(save_path, "wb") as f:
             f.write(image_data)
-
+        
+    deploy()
     return jsonify({"message": f"Image received and saved as {save_path}"}), 200
 
 
@@ -71,13 +73,7 @@ def image_preprocessor(image_path):
                 # (batch_size, image dimension, single channel grayscale)
   return img_array
 
-
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=8080)
-
-    # Load the trained model from the header file
-    loaded_model = keras.models.load_model('handNums_model-1104.h5')
-
+def deploy():
     image_path = '/mnt/c/Users/leduo/Desktop/EE250-Collab/final_project/http/uploads/test_image.jpg'
     img_array = image_preprocessor(image_path)
     prediction = loaded_model(img_array) # use a direct call for small input size
@@ -91,3 +87,10 @@ if __name__ == '__main__':
         print("LED ON")
     else:
         print("LED OFF")
+
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=8080)
+
+    # Load the trained model from the header file
+    loaded_model = keras.models.load_model('handNums_model-1104.h5')
