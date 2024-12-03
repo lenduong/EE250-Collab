@@ -76,7 +76,7 @@ def image_preprocessor(image_path):
   return img_array
 
 # Initialize count
-count = 0
+trial_count = 0
 
 def deploy():
     image_path = '/mnt/c/Users/leduo/Desktop/EE250-Collab/final_project/http/uploads/test_image.jpg'
@@ -94,12 +94,12 @@ def deploy():
     # else:
     #     print("LED OFF")
     #     return False
-    if count %2 == 0:
+    if trial_count %2 == 0:
         return True
-        count += 1
+        trial_count += 1
     else:
         return False
-        count += 1
+        trial_count += 1
 
 
 if __name__ == '__main__':
@@ -108,5 +108,4 @@ if __name__ == '__main__':
     # Load the trained model from the header file
     loaded_model = keras.models.load_model('handNums_model-1104.h5')
 
-    # Initialize count
-    count = 0
+    
