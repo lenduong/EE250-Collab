@@ -33,6 +33,7 @@ from threading import Lock
 # import pickle
 
 app = Flask('RaspberryPi Mailbox Server')
+loaded_model = keras.models.load_model('handNums_model-1104.h5')
 
 
 @app.route('/send_image', methods=['POST'])
