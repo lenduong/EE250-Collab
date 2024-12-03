@@ -38,6 +38,7 @@ loaded_model = keras.models.load_model('handNums_model-1104.h5')
 
 @app.route('/')
 def home():
+    global LED_command
     if LED_command is None:
         return "No value detected yet."
     return LED_command
@@ -64,7 +65,8 @@ def post_image_callback():
     with open(save_path, "wb") as f:
             f.write(image_data)
         
-    global LED_command = deploy()
+    global LED_command
+    LED_command = deploy()
     
     return jsonify({"message1": f"Image received and saved as {save_path}", "message2":LED_command}), 200
 
