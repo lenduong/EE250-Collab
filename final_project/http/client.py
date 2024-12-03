@@ -24,7 +24,7 @@ _, buffer = cv2.imencode('.jpg', image)
 headers = {"Content-Type": "image/jpeg"}  # Indicate JPEG format
 response = requests.post(url, data=buffer.tobytes(), headers=headers)
 
-time.sleep(10)
+time.sleep(3)
 
 def led_pot():
     # ------------------------Set up for LED and Potentiometer---------------------------
