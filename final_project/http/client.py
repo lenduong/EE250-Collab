@@ -53,9 +53,13 @@ def led_pot():
         
             # Check the response status code
             if response.status_code == 200:
+                print("ooooooooooooooooooooooooooooooooooooooooooo")
                 print("Image uploaded successfully")
                 print(message["message1"])
-                print(message["message2"])
+                print("Command: ",message["message2"])
+                print("Flag: " , flag)
+                print("Potentiometer: " ,mcp.read_adc(0))
+                print("ooooooooooooooooooooooooooooooooooooooooooo")
                 # If message2 = True turn on light, else turn off
                 if (mcp.read_adc(0) > 530) and (flag == False) and message["message2"]:
                     # If potentiometer is turned to upper half, turn on Red LED
