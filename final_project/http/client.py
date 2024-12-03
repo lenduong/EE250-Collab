@@ -26,6 +26,8 @@ response = requests.post(url, data=buffer.tobytes(), headers=headers)
 
 time.sleep(3)
 
+new_response = True
+
 def led_pot():
     # ------------------------Set up for LED and Potentiometer---------------------------
         #using physical pin 11 to blink Red LED, 15 to blink Yellow LED
@@ -44,49 +46,51 @@ def led_pot():
         led = [15]
 
         while True:
-            global reponse
-            # ----------------------Process response from server---------------------------
-            # Parse the JSON file
-            # Message1 : image upload confirmation message
-            # Message2 : command to turn on or off light, ouput by ML model
-            message = response.json()
-        
-            # Check the response status code
-            if response.status_code == 200:
-                print("ooooooooooooooooooooooooooooooooooooooooooo")
-                print("Image uploaded successfully")
-                print(message["message1"])
-                print("Command: ",message["message2"])
-                print("Flag: " , flag)
-                print("Potentiometer: " ,mcp.read_adc(0))
-                print("ooooooooooooooooooooooooooooooooooooooooooo")
-                # If message2 = True turn on light, else turn off
-                if (mcp.read_adc(0) > 530) and (flag == False) and message["message2"]:
-                    # If potentiometer is turned to upper half, turn on Red LED
-                    GPIO.output(led, GPIO.LOW)
-                    led = [11]
-                    flag = True
-                    GPIO.output(led, GPIO.HIGH)
-                    print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
-                    print("Turning on Red LED")
-                    print("Potentiometer Channel 0: ", mcp.read_adc(0))
-                    print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
-                elif (mcp.read_adc(0) <= 500) and (flag == True) and message["message2"]: 
-                    # If potentiometer is turned to lower half, turn on Yellow LED
-                    GPIO.output(led, GPIO.LOW)
-                    led = [15]
-                    flag = False
-                    GPIO.output(led, GPIO.HIGH)
-                    print("-------------------------------------------")
-                    print("Turning on Yellow LED")
-                    print("Potentiometer Channel 0: ", mcp.read_adc(0))
-                    print("-------------------------------------------")
-                elif not message["message2"]:
-                    GPIO.output(led, GPIO.LOW)
-            else:
-                print("Error uploading image:", response.status_code)
+            # global new_response
+            if new_response ==True:
+                # global reponse
+                # ----------------------Process response from server---------------------------
+                # Parse the JSON file
+                # Message1 : image upload confirmation message
+                # Message2 : command to turn on or off light, ouput by ML model
+                message = response.json()
+            
+                # Check the response status code
+                if response.status_code == 200:
+                    print("ooooooooooooooooooooooooooooooooooooooooooo")
+                    print("Image uploaded successfully")
+                    print(message["message1"])
+                    print("Command: ",message["message2"])
+                    print("Flag: " , flag)
+                    print("Potentiometer: " ,mcp.read_adc(0))
+                    print("ooooooooooooooooooooooooooooooooooooooooooo")
+                    # If message2 = True turn on light, else turn off
+                    if (mcp.read_adc(0) > 530) and (flag == False) and message["message2"]:
+                        # If potentiometer is turned to upper half, turn on Red LED
+                        GPIO.output(led, GPIO.LOW)
+                        led = [11]
+                        flag = True
+                        GPIO.output(led, GPIO.HIGH)
+                        print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+                        print("Turning on Red LED")
+                        print("Potentiometer Channel 0: ", mcp.read_adc(0))
+                        print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+                    elif (mcp.read_adc(0) <= 500) and (flag == True) and message["message2"]: 
+                        # If potentiometer is turned to lower half, turn on Yellow LED
+                        GPIO.output(led, GPIO.LOW)
+                        led = [15]
+                        flag = False
+                        GPIO.output(led, GPIO.HIGH)
+                        print("-------------------------------------------")
+                        print("Turning on Yellow LED")
+                        print("Potentiometer Channel 0: ", mcp.read_adc(0))
+                        print("-------------------------------------------")
+                    elif not message["message2"]:
+                        GPIO.output(led, GPIO.LOW)
+                else:
+                    print("Error uploading image:", response.status_code)
 
-            time.sleep(3)
+                new_response = False
             
 
 if __name__ == '__main__':
@@ -130,7 +134,7 @@ if __name__ == '__main__':
             # Send the image via HTTP POST
             headers = {"Content-Type": "image/jpeg"}  # Indicate JPEG format
             response = requests.post(url, data=buffer.tobytes(), headers=headers)
-
+            new_response = True
             time.sleep(3)
         
 
