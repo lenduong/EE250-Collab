@@ -40,5 +40,8 @@ if __name__ == '__main__':
         # Check the response status code
         if response.status_code == 200:
             print("Image uploaded successfully")
+            print(response.message1)
         else:
             print("Error uploading image:", response.status_code)
+
+        
