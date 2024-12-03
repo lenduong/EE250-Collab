@@ -88,7 +88,6 @@ if __name__ == '__main__':
         
             # Send the image via HTTP POST
             headers = {"Content-Type": "image/jpeg"}  # Indicate JPEG format
-            global response
             response = requests.post(url, data=buffer.tobytes(), headers=headers)
 
             sleep(10)
