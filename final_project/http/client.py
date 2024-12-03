@@ -5,7 +5,7 @@ import RPi.GPIO as GPIO
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
 
-response
+response = 1
 
 def led_pot():
     # ------------------------Set up for LED and Potentiometer---------------------------
@@ -78,19 +78,19 @@ if __name__ == '__main__':
         # Start recording
         cam = cv2.VideoCapture(0)
 
-        # while True:
+        while True:
             # Caputure the imgage
-        ret, image = cam.read()
-        cam.release()
-    
-        # Turn the image into jpg file
-        _, buffer = cv2.imencode('.jpg', image)
-    
-        # Send the image via HTTP POST
-        headers = {"Content-Type": "image/jpeg"}  # Indicate JPEG format
-        response = requests.post(url, data=buffer.tobytes(), headers=headers)
+            ret, image = cam.read()
+            cam.release()
+        
+            # Turn the image into jpg file
+            _, buffer = cv2.imencode('.jpg', image)
+        
+            # Send the image via HTTP POST
+            headers = {"Content-Type": "image/jpeg"}  # Indicate JPEG format
+            response = requests.post(url, data=buffer.tobytes(), headers=headers)
 
-            # sleep(10)
+            sleep(10)
         
 
         
