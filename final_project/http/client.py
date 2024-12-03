@@ -82,7 +82,7 @@ def led_pot():
             else:
                 print("Error uploading image:", response.status_code)
 
-            time.sleep(1)
+            time.sleep(3)
             
 
 if __name__ == '__main__':
@@ -127,7 +127,7 @@ if __name__ == '__main__':
             headers = {"Content-Type": "image/jpeg"}  # Indicate JPEG format
             response = requests.post(url, data=buffer.tobytes(), headers=headers)
 
-            time.sleep(10)
+            time.sleep(3)
         
 
         
