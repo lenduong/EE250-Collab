@@ -20,8 +20,8 @@ if __name__ == '__main__':
         SPI_DEVICE = 0
         mcp = Adafruit_MCP3008.MCP3008(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
         
-        flag = True # True = Red is on, False = Yellow is on
-        led = [11]
+        flag = False # True = Red is on, False = Yellow is on
+        led = [15]
         # -------------------------Record and send image from RPi to Server ----------------------
         # Create url to send to server (using server's IP addr)
         url = "http://192.168.91.71:8080/send_image"
