@@ -103,3 +103,6 @@ if __name__ == '__main__':
 
     # Load the trained model from the header file
     loaded_model = keras.models.load_model('handNums_model-1104.h5')
+
+    # Initialize count
+    count = 0
