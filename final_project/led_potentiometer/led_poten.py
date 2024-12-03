@@ -34,7 +34,7 @@ while True:
   # GPIO.output(yellow_led, GPIO.LOW)
 
   
-  if (mcp.read_adc(0) > 512) and (flag == False) :
+  if (mcp.read_adc(0) > 530) and (flag == False) :
     # If potentiometer is turned to upper half, turn on Red LED
     GPIO.output(led, GPIO.LOW)
     led = [11]
@@ -43,7 +43,7 @@ while True:
     print("Turning on Red LED")
     print("Potentiometer Channel 0: ", mcp.read_adc(0))
     print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
-  elif (mcp.read_adc(0) <= 512) and (flag == True): 
+  elif (mcp.read_adc(0) <= 500) and (flag == True): 
     # If potentiometer is turned to lower half, turn on Yellow LED
     GPIO.output(led, GPIO.LOW)
     led = [15]
