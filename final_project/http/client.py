@@ -4,6 +4,7 @@ import time
 import RPi.GPIO as GPIO
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
+import threading
 
 response = 1
 
