@@ -6,7 +6,7 @@ import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
 import threading
 
-response = None
+response
 
 def led_pot():
     # ------------------------Set up for LED and Potentiometer---------------------------
@@ -66,11 +66,6 @@ def led_pot():
             
 
 if __name__ == '__main__':
-        # spawn a thread to read keyboard input, specifying the function to run
-        thread = threading.Thread(target=led_pot)
-        thread.daemon = True # It's just input so the thread can die as soon as the main program exit
-        # start the thread executing
-        thread.start()
         
         # -------------------------Record and send image from RPi to Server ----------------------
         # Create url to send to server (using server's IP addr)
@@ -78,6 +73,25 @@ if __name__ == '__main__':
         
         # Start recording
         cam = cv2.VideoCapture(0)
+
+        # Caputure the imgage
+        ret, image = cam.read()
+        cam.release()
+    
+        # Turn the image into jpg file
+        _, buffer = cv2.imencode('.jpg', image)
+    
+        # Send the image via HTTP POST
+        headers = {"Content-Type": "image/jpeg"}  # Indicate JPEG format
+        response = requests.post(url, data=buffer.tobytes(), headers=headers)
+
+        time.sleep(10)
+
+        # spawn a thread to read keyboard input, specifying the function to run
+        thread = threading.Thread(target=led_pot)
+        thread.daemon = True # It's just input so the thread can die as soon as the main program exit
+        # start the thread executing
+        thread.start()
 
         while True:
             # Caputure the imgage
