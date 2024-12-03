@@ -23,6 +23,9 @@ if __name__ == '__main__':
         flag = True # True = Red is on, False = Yellow is on
         led = [11]
         # -------------------------Record and send image from RPi to Server ----------------------
+        # Create url to send to server (using server's IP addr)
+        url = "http://192.168.91.71:8080/send_image"
+        
         # Start recording
         cam = cv2.VideoCapture(0)
     
