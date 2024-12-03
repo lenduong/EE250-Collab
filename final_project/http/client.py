@@ -6,7 +6,7 @@ import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
 import threading
 
-response = 1
+response = Null
 
 def led_pot():
     # ------------------------Set up for LED and Potentiometer---------------------------
