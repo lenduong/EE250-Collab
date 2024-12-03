@@ -28,11 +28,11 @@ if __name__ == '__main__':
 
   # Find the hand number image the model should read/predict
   # image_path = 'g_1.png'
-  image_path = '/mnt/c/Users/leduo/Desktop/EE250-Collab/final_project/capturing_single_image/g_5.png'
+  image_path = '/mnt/c/Users/leduo/Desktop/EE250-Collab/final_project/capturing_single_image/g_4.png'
   # if len(sys.argv) > 0:
   #   image_path = sys.argv[0]
 
-  img_array = image_preprocessor('1003_4.png')
+  img_array = image_preprocessor(image_path)
   prediction = loaded_model(img_array) # use a direct call for small input size
   predict_value = np.argmax(prediction)
   
