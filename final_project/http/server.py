@@ -32,6 +32,8 @@ from threading import Lock
 
 # import pickle
 
+# Initialize count
+trial_count = 0
 app = Flask('RaspberryPi Mailbox Server')
 loaded_model = keras.models.load_model('handNums_model-1104.h5')
 
@@ -74,9 +76,6 @@ def image_preprocessor(image_path):
   img_array = img_array.reshape(1, 128, 128, 1)  # Reshape for model input
                 # (batch_size, image dimension, single channel grayscale)
   return img_array
-
-# Initialize count
-trial_count = 0
 
 def deploy():
     image_path = '/mnt/c/Users/leduo/Desktop/EE250-Collab/final_project/http/uploads/test_image.jpg'
