@@ -35,9 +35,10 @@ from threading import Lock
 app = Flask('RaspberryPi Mailbox Server')
 loaded_model = keras.models.load_model('handNums_model-1104.h5')
 
-@app.route('/send_image', methods=['POST'])
 # Initialize count
 count = 0
+
+@app.route('/send_image', methods=['POST'])
 def post_image_callback():
     # # Check if an image is in the request
     # if 'image' not in request.files:
@@ -59,13 +60,8 @@ def post_image_callback():
     with open(save_path, "wb") as f:
             f.write(image_data)
         
-    # LED_command = deploy()
-    if count %2 == 0:
-        LED_command = True
-        count += 1
-    else:
-        LED_command = False
-        count += 1
+    LED_command = deploy()
+    
     return jsonify({"message1": f"Image received and saved as {save_path}", "message2":LED_command}), 200
 
 
@@ -91,12 +87,18 @@ def deploy():
     print(predict_value)
 
     # Taking model output and converting it to be ON or OFF for LEDs
-    if predict_value % 2 == 0:
-        print("LED ON")
+    # if predict_value % 2 == 0:
+    #     print("LED ON")
+    #     return True
+    # else:
+    #     print("LED OFF")
+    #     return False
+    if count %2 == 0:
         return True
+        count += 1
     else:
-        print("LED OFF")
         return False
+        count += 1
 
 
 if __name__ == '__main__':
