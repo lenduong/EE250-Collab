@@ -8,27 +8,34 @@ import matplotlib.pyplot as plt
 print("Arguments: ")
 print(sys.argv)
 
-def image_preprocess(image_path):
-  img = Image.open(image_path)
-  plt.imshow(img)
-  img = img.convert('L')  # Convert to grayscale
+# Define image pre-processing in a function
+def image_preprocessor(image_path):
+  img = Image.open(image_path).convert('L')
   img = img.resize(size=(128, 128))
-  img_array = np.array(img)  # Convert to a numpy array
+  img_array = (np.array(img) > 100)*255  # Convert to a numpy array
+  plt.imshow(img_array)
+
   img_array = img_array / 255.0  # Normalize pixel values to [0, 1]
   img_array = img_array.reshape(1, 128, 128, 1)  # Reshape for model input
-                # parameters: (batch_size, image dimension, single channel grayscale)
+                # (batch_size, image dimension, single channel grayscale)
+
   return img_array
 
 if __name__ == '__main__':
   # Load the model from the header file
-  loaded_model = keras.models.load_model('handNums_model.h5')
+  # Load the trained model
+  loaded_model = keras.models.load_model('handNums_model-1104.h5')
 
   # Find the hand number image the model should read/predict
   # image_path = 'g_1.png'
   image_path = '/mnt/c/Users/leduo/Desktop/EE250-Collab/final_project/capturing_single_image/g_5.png'
   # if len(sys.argv) > 0:
   #   image_path = sys.argv[0]
-  
-  prediction = loaded_model(image_preprocess(image_path)) # use a direct call for small input size
+
+  img_array = image_preprocessor('1003_4.png')
+  prediction = loaded_model(img_array) # use a direct call for small input size
+
   print("Model Prediction: ")
   print(np.argmax(prediction))
+  
+  
