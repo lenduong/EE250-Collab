@@ -105,7 +105,7 @@ def deploy():
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8080)
 
-    # Load the trained model from the header file
-    loaded_model = keras.models.load_model('handNums_model-1104.h5')
+    # # Load the trained model from the header file
+    # loaded_model = keras.models.load_model('handNums_model-1104.h5')
 
     
