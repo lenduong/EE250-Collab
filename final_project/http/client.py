@@ -1,5 +1,6 @@
 import requests
 import cv2
+from PIL import Image, ImageEnhance
 import time
 import RPi.GPIO as GPIO
 import Adafruit_GPIO.SPI as SPI
@@ -48,8 +49,14 @@ resized_frame = cv2.resize(cropped_frame, (128, 128))
 # Save the cropped image
 cv2.imwrite("cropped_image_128x128.jpg", resized_frame)
 
+# Enhance the contrast
+enhancer = ImageEnhance.Contrast(resized_frame)
+contrast_factor = 2.0  # Increase contrast (1.0 = no change)
+image_contrast = enhancer.enhance(contrast_factor)
+
+
 # Turn the image into jpg file
-_, buffer = cv2.imencode('.jpg', resized_frame)
+_, buffer = cv2.imencode('.jpg', image_contrast)
 
 # Send the image via HTTP POST
 headers = {"Content-Type": "image/jpeg"}  # Indicate JPEG format
@@ -175,9 +182,15 @@ if __name__ == '__main__':
             
             # # Save the cropped image
             # cv2.imwrite("cropped_image_128x128.jpg", resized_frame)
+
+            # Enhance the contrast
+            enhancer = ImageEnhance.Contrast(resized_frame)
+            contrast_factor = 2.0  # Increase contrast (1.0 = no change)
+            image_contrast = enhancer.enhance(contrast_factor)
+            
             
             # Turn the image into jpg file
-            _, buffer = cv2.imencode('.jpg', resized_frame)
+            _, buffer = cv2.imencode('.jpg', image_contrast)
         
             # Send the image via HTTP POST
             headers = {"Content-Type": "image/jpeg"}  # Indicate JPEG format
