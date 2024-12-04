@@ -61,7 +61,7 @@ def led_pot():
                     print("Image uploaded successfully")
                     print(message["message1"])
                     print("Command: ",message["message2"])
-                    print("Flag: " , flag)
+                    # print("Flag: " , flag)
                     print("Potentiometer: " ,mcp.read_adc(0))
                     print("ooooooooooooooooooooooooooooooooooooooooooo")
                     # If message2 = True turn on light, else turn off
