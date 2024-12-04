@@ -42,7 +42,7 @@ def led_pot():
         SPI_DEVICE = 0
         mcp = Adafruit_MCP3008.MCP3008(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
         
-        flag = False # True = Red is on, False = Yellow is on
+        # flag = False # True = Red is on, False = Yellow is on
         led = [15]
 
         while True:
@@ -65,21 +65,19 @@ def led_pot():
                     print("Potentiometer: " ,mcp.read_adc(0))
                     print("ooooooooooooooooooooooooooooooooooooooooooo")
                     # If message2 = True turn on light, else turn off
-                    if (mcp.read_adc(0) > 530) and (flag == False) and message["message2"]:
+                    if (mcp.read_adc(0) > 530) and message["message2"]:
                         # If potentiometer is turned to upper half, turn on Red LED
-                        GPIO.output(led, GPIO.LOW)
+                        # GPIO.output(led, GPIO.LOW)
                         led = [11]
-                        flag = True
                         GPIO.output(led, GPIO.HIGH)
                         print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
                         print("Turning on Red LED")
                         print("Potentiometer Channel 0: ", mcp.read_adc(0))
                         print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
-                    elif (mcp.read_adc(0) <= 500) and (flag == True) and message["message2"]: 
+                    elif (mcp.read_adc(0) <= 500) and message["message2"]: 
                         # If potentiometer is turned to lower half, turn on Yellow LED
-                        GPIO.output(led, GPIO.LOW)
+                        # GPIO.output(led, GPIO.LOW)
                         led = [15]
-                        flag = False
                         GPIO.output(led, GPIO.HIGH)
                         print("-------------------------------------------")
                         print("Turning on Yellow LED")
