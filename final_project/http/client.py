@@ -47,7 +47,6 @@ def led_pot():
 
         while True:
             global new_response
-            print("New Response: ", new_response)
             if new_response ==True:
                 global reponse
                 # ----------------------Process response from server---------------------------
