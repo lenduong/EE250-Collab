@@ -184,7 +184,7 @@ if __name__ == '__main__':
             # cv2.imwrite("cropped_image_128x128.jpg", resized_frame)
 
             # Adjust contrast
-            alpha = 3.0  # Contrast control
+            alpha = 2.0  # Contrast control
             beta = -50     # Brightness control
             adjusted = cv2.convertScaleAbs(resized_frame, alpha=alpha, beta=beta)
             
