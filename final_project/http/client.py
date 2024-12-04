@@ -10,21 +10,51 @@ import threading
 # Create url to send to server (using server's IP addr)
 url = "http://192.168.91.71:8080/send_image"
 
-# Start recording
-cam = cv2.VideoCapture(0)
+# # Start recording
+# cam = cv2.VideoCapture(0)
 
+# # Caputure the imgage
+# ret, image = cam.read()
+# cam.release()
+
+# # Turn the image into jpg file
+# _, buffer = cv2.imencode('.jpg', image)
+
+# # Send the image via HTTP POST
+# headers = {"Content-Type": "image/jpeg"}  # Indicate JPEG format
+# response = requests.post(url, data=buffer.tobytes(), headers=headers)
+
+# time.sleep(3)
+
+# Start recording ----------------------------------
+cam = cv2.VideoCapture(0)
 # Caputure the imgage
-ret, image = cam.read()
+ret, frame = cam.read()
 cam.release()
 
+# Get image dimensions
+height, width, _ = frame.shape
+# print(f"Captured image dimensions: {width}x{height}")
+
+# Crop the image to the center square
+size = min(height, width)
+x_start = (width - size) // 2
+y_start = (height - size) // 2
+cropped_frame = frame[y_start:y_start+size, x_start:x_start+size]
+
+# Resize the cropped image to 128x128
+resized_frame = cv2.resize(cropped_frame, (128, 128))
+
+# Save the cropped image
+cv2.imwrite("cropped_image_128x128.jpg", resized_frame)
+
 # Turn the image into jpg file
-_, buffer = cv2.imencode('.jpg', image)
+_, buffer = cv2.imencode('.jpg', resized_frame)
 
 # Send the image via HTTP POST
 headers = {"Content-Type": "image/jpeg"}  # Indicate JPEG format
 response = requests.post(url, data=buffer.tobytes(), headers=headers)
-
-time.sleep(3)
+time.sleep(3) # -----------------------------------------------------
 
 new_response = True
 
@@ -127,11 +157,27 @@ if __name__ == '__main__':
             # Start recording
             cam = cv2.VideoCapture(0)
             # Caputure the imgage
-            ret, image = cam.read()
+            ret, frame = cam.read()
             cam.release()
-        
+
+            # Get image dimensions
+            height, width, _ = frame.shape
+            # print(f"Captured image dimensions: {width}x{height}")
+            
+            # Crop the image to the center square
+            size = min(height, width)
+            x_start = (width - size) // 2
+            y_start = (height - size) // 2
+            cropped_frame = frame[y_start:y_start+size, x_start:x_start+size]
+            
+            # Resize the cropped image to 128x128
+            resized_frame = cv2.resize(cropped_frame, (128, 128))
+            
+            # # Save the cropped image
+            # cv2.imwrite("cropped_image_128x128.jpg", resized_frame)
+            
             # Turn the image into jpg file
-            _, buffer = cv2.imencode('.jpg', image)
+            _, buffer = cv2.imencode('.jpg', resized_frame)
         
             # Send the image via HTTP POST
             headers = {"Content-Type": "image/jpeg"}  # Indicate JPEG format
