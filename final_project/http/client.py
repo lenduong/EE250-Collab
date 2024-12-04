@@ -47,6 +47,7 @@ def led_pot():
 
         while True:
             global new_response
+            print("New Response: ", new_response)
             if new_response ==True:
                 global reponse
                 # ----------------------Process response from server---------------------------
@@ -65,19 +66,23 @@ def led_pot():
                     print("Potentiometer: " ,mcp.read_adc(0))
                     print("ooooooooooooooooooooooooooooooooooooooooooo")
                     # If message2 = True turn on light, else turn off
-                    if (mcp.read_adc(0) > 530) and message["message2"]:
+
+                    if (mcp.read_adc(0) > 530):
+                        led = [11]
+                    elif (mcp.read_adc(0) <= 500):
+                        led = [15]
+                    
+                    if message["message2"] and led == [11]:
                         # If potentiometer is turned to upper half, turn on Red LED
                         # GPIO.output(led, GPIO.LOW)
-                        led = [11]
                         GPIO.output(led, GPIO.HIGH)
                         print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
                         print("Turning on Red LED")
                         print("Potentiometer Channel 0: ", mcp.read_adc(0))
                         print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
-                    elif (mcp.read_adc(0) <= 500) and message["message2"]: 
+                    elif message["message2"] and led == [15]: 
                         # If potentiometer is turned to lower half, turn on Yellow LED
                         # GPIO.output(led, GPIO.LOW)
-                        led = [15]
                         GPIO.output(led, GPIO.HIGH)
                         print("-------------------------------------------")
                         print("Turning on Yellow LED")
