@@ -42,7 +42,7 @@ def home():
     global LED_command
     # message = str(LED_command)
     # return message
-    if LED_command is True:
+    if LED_command == True:
         return render_template('frontEnd-ON.html')
     return render_template('frontEnd-OFF.html')
 
