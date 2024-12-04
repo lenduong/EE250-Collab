@@ -49,14 +49,14 @@ resized_frame = cv2.resize(cropped_frame, (128, 128))
 # Save the cropped image
 cv2.imwrite("cropped_image_128x128.jpg", resized_frame)
 
-# Enhance the contrast
-enhancer = ImageEnhance.Contrast(resized_frame)
-contrast_factor = 2.0  # Increase contrast (1.0 = no change)
-image_contrast = enhancer.enhance(contrast_factor)
+# Adjust contrast
+alpha = 2.0  # Contrast control
+beta = 0     # Brightness control
+adjusted = cv2.convertScaleAbs(resized_frame, alpha=alpha, beta=beta)
 
 
 # Turn the image into jpg file
-_, buffer = cv2.imencode('.jpg', image_contrast)
+_, buffer = cv2.imencode('.jpg', adjusted)
 
 # Send the image via HTTP POST
 headers = {"Content-Type": "image/jpeg"}  # Indicate JPEG format
@@ -183,14 +183,14 @@ if __name__ == '__main__':
             # # Save the cropped image
             # cv2.imwrite("cropped_image_128x128.jpg", resized_frame)
 
-            # Enhance the contrast
-            enhancer = ImageEnhance.Contrast(resized_frame)
-            contrast_factor = 2.0  # Increase contrast (1.0 = no change)
-            image_contrast = enhancer.enhance(contrast_factor)
+            # Adjust contrast
+            alpha = 2.0  # Contrast control
+            beta = 0     # Brightness control
+            adjusted = cv2.convertScaleAbs(resized_frame, alpha=alpha, beta=beta)
             
             
             # Turn the image into jpg file
-            _, buffer = cv2.imencode('.jpg', image_contrast)
+            _, buffer = cv2.imencode('.jpg', adjusted)
         
             # Send the image via HTTP POST
             headers = {"Content-Type": "image/jpeg"}  # Indicate JPEG format
