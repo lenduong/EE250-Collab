@@ -46,9 +46,9 @@ def led_pot():
         led = [15]
 
         while True:
-            # global new_response
+            global new_response
             if new_response ==True:
-                # global reponse
+                global reponse
                 # ----------------------Process response from server---------------------------
                 # Parse the JSON file
                 # Message1 : image upload confirmation message
