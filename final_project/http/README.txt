@@ -20,7 +20,8 @@ LIST OF EXTERNAL LIBRARIES:
 2. Requests
 3. cv2 (OpenCV)
 4. Tensorflow
-5. PIL (Pillow)
+5. Tensorflow Keras
 6. adafruit-mcp3008
 7. matplotlib
 8. numpy
+9. PIL (Pillow)
