@@ -62,7 +62,7 @@ def post_image_callback():
 
 
 # --------------------------- Code for ML Prediction ----------------------------#
-# Define image pre-processing in a function
+# Define image pre-processing in a function -----------------
 def image_preprocessor(image_path):
   img = Image.open(image_path).convert('L')
   img = img.resize(size=(128, 128))
@@ -74,6 +74,7 @@ def image_preprocessor(image_path):
                 # (batch_size, image dimension, single channel grayscale)
   return img_array
 
+# Feed the image into the trained model to predict -----------
 def deploy():
     image_path = '/mnt/c/Users/leduo/Desktop/EE250-Collab/final_project/http/uploads/test_image.jpg'
     img_array = image_preprocessor(image_path)
@@ -90,7 +91,7 @@ def deploy():
         return True
     else: # Odd value produce LED OFF
         print("LED OFF")
-    return False
+        return False
 # -------------------------------------------------------------------------------#
 
 
