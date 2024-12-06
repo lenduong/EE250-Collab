@@ -13,7 +13,7 @@ CODE EXECUTION INSTRUCTION:
         Client: 
                 # Replace the ip address in the URL with your server's address (lines 27 & 150)
                 $ python3 client.py
-7. Navigate to a web browser and type "http://localhost:8080/" to display front end web
+7. Navigate to a web browser and type "http://localhost:8080/" to display front end web :)
 
 LIST OF EXTERNAL LIBRARIES:
 1. Flask
