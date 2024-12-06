@@ -9,6 +9,7 @@ CODE EXECUTION INSTRUCTION:
         Server: 
                 # If this is a VM of some sort, make sure to forward port 8080 from the host machine
                 #   and make sure firewall isn't blocking the port forwarding
+                # Replace image path in line 79 with "<your current working directory>/uploads/test_image.jpg"
                 $ python3 server.py
         Client: 
                 # Replace the ip address in the URL with your server's address (lines 27 & 150)
